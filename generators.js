@@ -1644,3 +1644,65 @@ function roundCloud() {
 }
 
 register(roundCloud, "Round Cloud", "Simon Tiger");
+
+function morningCloud() {
+
+  var r = width * 0.45;
+  var ellipses = [];
+
+  function dreamEllipse(x, y, size) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+  };
+
+  for (var i = -PI + PI / 10; i <= -PI / 10; i += PI / 10) {
+
+    if (i == -PI + PI / 10 || i >= (-PI / 10) - PI / 10) {
+      var s = 250;
+    } else {
+      var s = random(250, 500);
+    }
+    var x = (r * 0.75) * Math.cos(i);
+    var y = (0.35 * r) * Math.sin(i);
+    var newEllipse = new dreamEllipse(x + width / 2, y - 50 + height / 2, s);
+
+    ellipses.push(newEllipse);
+  }
+  fill(255);
+  noStroke();
+  ellipseMode(CENTER);
+  ellipse(width / 2, height / 2, r * 1.65, r * 1.15);
+  fill(254, 211, 48);
+  noStroke();
+  ellipse(ellipses[ellipses.length - 1].x + height / 50 + ellipses[ellipses.length - 1].size / 10, ellipses[ellipses.length - 1].y - ellipses[ellipses.length - 1].size / 2, ellipses[ellipses.length - 1].size * 1.5, ellipses[ellipses.length - 1].size * 1.5);
+
+  for (var i = 0; i < ellipses.length; i++) {
+    fill(255);
+    noStroke();
+    ellipseMode(CENTER);
+    ellipse(ellipses[i].x, ellipses[i].y, ellipses[i].size, ellipses[i].size);
+  }
+
+  fill(255);
+  noStroke();
+  ellipseMode(CENTER);
+  ellipse(width / 2, height / 2, r * 1.65, r * 1.15);
+
+  fill(122, 182, 251);
+  noStroke();
+  ellipse(ellipses[0].x + height / 50, ellipses[0].y, ellipses[0].size / 4, ellipses[0].size / 4);
+  ellipse(ellipses[ellipses.length - 1].x + height / 50, ellipses[ellipses.length - 1].y, ellipses[ellipses.length - 1].size / 4, ellipses[ellipses.length - 1].size / 4);
+  fill(255);
+  ellipse(ellipses[0].x + height / 50 + ellipses[0].size / 10, ellipses[0].y - ellipses[0].size / 10, ellipses[0].size / 8, ellipses[0].size / 8);
+  ellipse(ellipses[ellipses.length - 1].x + height / 50 + ellipses[ellipses.length - 1].size / 10, ellipses[ellipses.length - 1].y - ellipses[ellipses.length - 1].size / 10, ellipses[ellipses.length - 1].size / 8, ellipses[ellipses.length - 1].size / 8);
+
+  noFill();
+  stroke(122, 182, 251);
+  strokeWeight(14);
+  arc(width / 2, height / 2 + height / 15, r * 1.15, r * .75, radians(45), radians(135));
+
+  return [100, 100, width - 200, height - 200];
+}
+
+register(morningCloud, "Morning Cloud", "Simon");
